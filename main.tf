@@ -61,3 +61,15 @@ resource "aws_route_table" "custom_route_table" {
     }
   }
 }
+
+# Associating the route table to the first subnet
+resource "aws_route_table_association" "subnet1_ass" {
+  route_table_id = aws_route_table.custom_route_table.id
+  subnet_id = aws_subnet.infra_public_subnet.id
+}
+
+# Associating the route table to the second subnet
+resource "aws_route_table_association" "subnet2_ass" {
+  route_table_id = aws_route_table.custom_route_table.id
+  subnet_id = aws_subnet.infra_public_subnet.id
+}

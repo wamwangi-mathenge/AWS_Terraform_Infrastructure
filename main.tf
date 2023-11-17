@@ -43,6 +43,21 @@ resource "aws_subnet" "infra_public_subnet2" {
 }
 
 # Create an Internet Gateway
-resource "aws_internet_gateway" "infra_igw" {
+resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc_infrastructure.id
+}
+
+# Create a route table
+resource "aws_route_table" "custom_route_table" {
+  vpc_id = aws_vpc.vpc_infrastructure.id
+
+  # Define the routes
+  route = {
+    cidr_block = "0.0.0.0/0"
+    gatteway_id = aws_internet_gateway.igw.id
+
+    tags = {
+        Name = "CustomRouteTable"
+    }
+  }
 }

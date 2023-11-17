@@ -29,3 +29,8 @@ resource "aws_subnet" "infra_public_subnet" {
     Name = "infra_public_subnet"
   }
 }
+
+# Create an Internet Gateway
+resource "aws_internet_gateway" "infra_igw" {
+  vpc_id = aws_vpc.vpc_infrastructure.id
+}
